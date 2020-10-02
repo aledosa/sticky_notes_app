@@ -1,6 +1,6 @@
 import * as React from "react";
 import { Redirect, Route, Switch } from "react-router-dom";
-import { HomeScreen } from "./components/HomeScreen";
+import { HomeScreen } from "./components/screens/HomeScreen";
 
 const Root: React.FC = () => {
   return <Redirect to="/sticky_notes_app" />;
