@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import {
   AddCircleOutlineIcon,
   Card,
-  ClickableElement,
+  //   ClickableElement,
   colors,
   Column,
   DivFlex,
@@ -10,8 +10,10 @@ import {
   H2,
   H3,
   H4,
+  mediaQueries,
   Row,
   SvgSizes,
+  TertiaryButton,
   TextareaElement,
   withParentColumns,
   Wrapper,
@@ -31,14 +33,19 @@ export const HomeScreen: React.FC = () => {
     updateIsTextAdded(value);
   };
 
-  const noteContentLgWidth = withParentColumns(9);
-  //   const noteContentMdWidth = withParentColumns(4);
-  //   const noteContentSmWidth = withParentColumns(4);
+  const noteContentLgWidth = withParentColumns(12);
+  const noteContentMdWidth = withParentColumns(8);
+  const noteContentSmWidth = withParentColumns(4);
 
   return (
-    <Wrapper className="homeScreen-wrapper">
+    <Wrapper className="homeScreen-wrapper" css="width: auto;">
       <Row className="header-row">
-        <Column className="header-column" lg={12} md={8} sm={4}>
+        <Column
+          className="header-column"
+          lg={noteContentLgWidth(12)}
+          md={noteContentMdWidth(8)}
+          sm={noteContentSmWidth(4)}
+        >
           <DivGeneral padding="32px 0 48px">
             <DivFlex alignContent="center" paddingBottom="24px">
               <H2 color={colors.GRAY_500}>Stickers Note App</H2>
@@ -48,50 +55,72 @@ export const HomeScreen: React.FC = () => {
             </DivFlex>
             <DivFlex alignContent="center" paddingBottom="24px">
               <H4 color={colors.GRAY_200} css="text-transform: none;">
-                To start writing and organizing your life click in the note
+                To start writing and organizing your life click on the note
                 below.
               </H4>
             </DivFlex>
           </DivGeneral>
         </Column>
       </Row>
-      <DivFlex>
-        <Row className="body-row">
+
+      <Row className="body-row">
+        <DivFlex
+          css={`
+            flex: 1;
+            flex-direction: column;
+            @media (min-width: ${mediaQueries.SMALL_TABLET_MIN_WIDTH}) {
+              flex-direction: row;
+            }
+          `}
+        >
           <Column
-            className="Menu-column"
+            className="leftSide-column"
             css={`
-              border-right: 1px solid ${colors.GRAY_200};
-              display: inline-block;
-              height: 100%;
+              border-bottom: 1px solid ${colors.GRAY_200};
+              padding: 16px 0;
+              @media (min-width: ${mediaQueries.SMALL_TABLET_MIN_WIDTH}) {
+                border-bottom: none;
+                border-right: 1px solid ${colors.GRAY_200};
+              }
             `}
-            lg={0.5}
-            md={4}
-            sm={4}
+            justifyContent="center"
+            lg={noteContentLgWidth(1)}
+            md={noteContentMdWidth(1)}
+            sm={noteContentSmWidth(4)}
           >
-            <ClickableElement onClick={handleAddNote}>
-              <AddCircleOutlineIcon
-                fill={colors.BLUE_200}
-                size={SvgSizes.LG}
-                title="Add note"
-              />
-            </ClickableElement>
+            <TertiaryButton onClick={handleAddNote}>
+              <DivFlex justifyContent="center">
+                <AddCircleOutlineIcon
+                  fill={colors.BLUE_200}
+                  size={SvgSizes.LG}
+                  title="Add note"
+                />
+              </DivFlex>
+            </TertiaryButton>
           </Column>
           <Column
-            className="notes-column"
-            css={`
-              display: inline-block;
-              height: 100%;
-            `}
-            lg={9}
-            md={4}
-            sm={4}
+            className="rightSide-column"
+            css="padding: 8px 0;"
+            lg={noteContentLgWidth(11)}
+            md={noteContentMdWidth(7)}
+            sm={noteContentSmWidth(4)}
           >
-            <DivFlex>
+            <Row
+              className="cards-row"
+              css={`
+                margin: 0;
+                @media (min-width: ${mediaQueries.SMALL_TABLET_MIN_WIDTH}) {
+                  margin-left: -8px;
+                  margin-right: -8px;
+                }
+              `}
+            >
               <Column
                 className="card-column"
-                lg={noteContentLgWidth(3)}
-                md={4}
-                sm={4}
+                css="padding: 8px 0;"
+                lg={noteContentLgWidth(3.5)}
+                md={noteContentMdWidth(3.5)}
+                sm={noteContentSmWidth(4)}
               >
                 <Card
                   css={`
@@ -120,12 +149,83 @@ export const HomeScreen: React.FC = () => {
                   </DivFlex>
                 </Card>
               </Column>
+
+              <Column
+                className="card-column"
+                css="padding: 8px 0;"
+                lg={noteContentLgWidth(3.5)}
+                md={noteContentMdWidth(3.5)}
+                sm={noteContentSmWidth(4)}
+              >
+                <Card
+                  css={`
+                    background-color: ${colors.YELLOW_200};
+                  `}
+                >
+                  <DivFlex>
+                    <TextareaElement
+                      css={`
+                        border: 1px solid transparent;
+
+                        &::placeholder {
+                          color: ${colors.GRAY_300};
+                        }
+                        &:active,
+                        &:focus {
+                          border-color: ${colors.GRAY_200};
+                        }
+                      `}
+                      id="noteText"
+                      name="noteArea"
+                      placeholder="Insert text here"
+                      value={isTextAdded}
+                      onChange={handleChangeTextarea}
+                    />
+                  </DivFlex>
+                </Card>
+              </Column>
+              <Column
+                className="card-column"
+                css="padding: 8px 0;"
+                lg={noteContentLgWidth(3.5)}
+                md={noteContentMdWidth(3.5)}
+                sm={noteContentSmWidth(4)}
+              >
+                <Card
+                  css={`
+                    background-color: ${colors.YELLOW_200};
+                  `}
+                >
+                  <DivFlex>
+                    <TextareaElement
+                      css={`
+                        border: 1px solid transparent;
+
+                        &::placeholder {
+                          color: ${colors.GRAY_300};
+                        }
+                        &:active,
+                        &:focus {
+                          border-color: ${colors.GRAY_200};
+                        }
+                      `}
+                      id="noteText"
+                      name="noteArea"
+                      placeholder="Insert text here"
+                      value={isTextAdded}
+                      onChange={handleChangeTextarea}
+                    />
+                  </DivFlex>
+                </Card>
+              </Column>
+
               {isNoteAdded && (
                 <Column
                   className="card-column"
-                  lg={noteContentLgWidth(3)}
-                  md={4}
-                  sm={4}
+                  css="padding: 8px 0;"
+                  lg={noteContentLgWidth(3.5)}
+                  md={noteContentMdWidth(3.5)}
+                  sm={noteContentSmWidth(4)}
                 >
                   <Card
                     css={`
@@ -156,10 +256,10 @@ export const HomeScreen: React.FC = () => {
                   </Card>
                 </Column>
               )}
-            </DivFlex>
+            </Row>
           </Column>
-        </Row>
-      </DivFlex>
+        </DivFlex>
+      </Row>
     </Wrapper>
   );
 };
