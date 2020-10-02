@@ -48,7 +48,7 @@ export const HomeScreen: React.FC = () => {
         >
           <DivGeneral padding="32px 0 48px">
             <DivFlex alignContent="center" paddingBottom="24px">
-              <H2 color={colors.GRAY_500}>Stickers Note App</H2>
+              <H2 color={colors.GRAY_500}>Sticky Notes App</H2>
             </DivFlex>
             <DivFlex alignContent="center" paddingBottom="24px">
               <H3 color={colors.GRAY_300}>Welcome Alexa!</H3>
