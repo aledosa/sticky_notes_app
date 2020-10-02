@@ -1,6 +1,6 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "d8be6e3c76b45ae376e80ca9dd88b62b",
+    "revision": "5e1f8a9b3125ed042ce345b0f7e35a2d",
     "url": "/sticky_notes_app/index.html"
   },
   {
@@ -8,7 +8,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/sticky_notes_app/static/css/2.3c845d0b.chunk.css"
   },
   {
-    "revision": "ec2810da543203a9a36a",
+    "revision": "7dfc1a2f3b6be998d042",
     "url": "/sticky_notes_app/static/css/main.82ed3c94.chunk.css"
   },
   {
@@ -20,8 +20,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/sticky_notes_app/static/js/2.f3679718.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "ec2810da543203a9a36a",
-    "url": "/sticky_notes_app/static/js/main.87903c1a.chunk.js"
+    "revision": "7dfc1a2f3b6be998d042",
+    "url": "/sticky_notes_app/static/js/main.94b008ba.chunk.js"
   },
   {
     "revision": "1c0665d21ca98689a631",
