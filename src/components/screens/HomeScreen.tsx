@@ -16,22 +16,13 @@ import {
   Wrapper,
 } from "@the-ksquare-group/zanma-react-components";
 import { NoteComponent } from "../molecules/NoteComponent";
-import { initialData } from "../atoms/DummyData";
+import { notesList, newNoteData } from "../atoms/DummyData";
 
 export const HomeScreen: React.FC = () => {
-  const [notesAddedCounter, updateNotesAddedCounter] = useState(1);
-  const [data, updateData] = useState(initialData);
+  const [newNote, updateNewNote] = useState(notesList);
 
   const handleClickAddNote = () => {
-    updateNotesAddedCounter(notesAddedCounter + 1);
-    updateData([...data, { noteId: notesAddedCounter, text: "" }]);
-  };
-
-  const handleChangeTextarea = ({
-    target: { value },
-  }: React.ChangeEvent<HTMLTextAreaElement>) => {
-    const getFocusedNoteId = document.activeElement?.id;
-    updateData([{ noteId: Number(getFocusedNoteId), text: value }]);
+    updateNewNote([...newNote, newNoteData]);
   };
 
   const noteContentLgWidth = withParentColumns(12);
@@ -52,7 +43,7 @@ export const HomeScreen: React.FC = () => {
               <H2 color={colors.GRAY_500}>Sticky Notes App</H2>
             </DivFlex>
             <DivFlex alignContent="center" paddingBottom="24px">
-              <H3 color={colors.GRAY_300}>Welcome Alexa!</H3>
+              <H3 color={colors.GRAY_300}>Welcome User!</H3>
             </DivFlex>
             <DivFlex alignContent="center" paddingBottom="24px">
               <H4 color={colors.GRAY_200} css="text-transform: none;">
@@ -116,7 +107,7 @@ export const HomeScreen: React.FC = () => {
                 }
               `}
             >
-              {data.map((note, index) => (
+              {newNote.map((note, index) => (
                 <Column
                   className="card-column"
                   css="padding: 8px 0;"
@@ -126,11 +117,9 @@ export const HomeScreen: React.FC = () => {
                   sm={noteContentSmWidth(4)}
                 >
                   <NoteComponent
-                    id={String(note.noteId)}
+                    id={`noteId-${index}`}
                     key={`noteKey-${index}`}
-                    name={`noteName-${note.noteId}`}
-                    value={note.text}
-                    onChangeTextarea={handleChangeTextarea}
+                    name={`noteName-${index}`}
                   />
                 </Column>
               ))}

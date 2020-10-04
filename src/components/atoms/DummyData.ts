@@ -1,1 +1,2 @@
-export const initialData = [{ noteId: 0, text: "" }];
+export const newNoteData = { text: "" };
+export const notesList = [newNoteData];

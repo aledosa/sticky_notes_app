@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   Card,
   colors,
@@ -10,19 +10,21 @@ interface INoteComponentProps {
   id?: string;
   name?: string;
   placeholder?: string;
-  value: string;
-  onChangeTextarea:
-    | ((event: React.ChangeEvent<HTMLTextAreaElement>) => void)
-    | undefined;
 }
 
 export const NoteComponent: React.FC<INoteComponentProps> = ({
   id = "noteComponent",
   name = "noteField",
   placeholder = "Insert text here",
-  value,
-  onChangeTextarea,
 }) => {
+  const [noteText, updateNoteText] = useState("");
+
+  const handleChangeTextarea = ({
+    target: { value },
+  }: React.ChangeEvent<HTMLTextAreaElement>) => {
+    updateNoteText(value);
+  };
+
   return (
     <Card
       css={`
@@ -45,8 +47,8 @@ export const NoteComponent: React.FC<INoteComponentProps> = ({
           id={id}
           name={name}
           placeholder={placeholder}
-          value={value}
-          onChange={onChangeTextarea}
+          value={noteText}
+          onChange={handleChangeTextarea}
         />
       </DivFlex>
     </Card>
